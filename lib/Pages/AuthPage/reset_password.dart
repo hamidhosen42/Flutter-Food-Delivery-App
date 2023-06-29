@@ -94,7 +94,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 1.0),
                     ),
-                    prefixIcon: const Icon(
+                    suffixIcon: const Icon(
                       Icons.email,
                       color: Colors.black45,
                     ),

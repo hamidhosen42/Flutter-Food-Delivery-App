@@ -13,12 +13,23 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final user = FirebaseAuth.instance.currentUser;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool isEmailVerified() {
+    final user = _auth.currentUser;
+    return user != null && user.emailVerified;
+  }
 
   @override
   void initState() {
     super.initState();
+    checkEmailVerification();
+  }
 
-    if (user != null) {
+  Future<void> checkEmailVerification() async {
+    // final bool verified = isEmailVerified();
+
+    if (user != null ) {
       Timer(const Duration(seconds: 1),
           () => Navigator.pushNamed(context, "homePage"));
     } else {
@@ -35,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           // !----------logo------------
+            // !----------logo------------
             Image.asset(
               "assets/logo.png",
               height: 300.h,

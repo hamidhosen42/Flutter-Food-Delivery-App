@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Pages/AuthPage/reset_password.dart';
 import 'package:food_delivery_app/res/app_string.dart';
 import 'package:food_delivery_app/res/color.dart';
-import 'package:food_delivery_app/utils/routes/route.dart';
 
 import 'Pages/AuthPage/SignInPage.dart';
 import 'Pages/AuthPage/SignUpPage.dart';
 import 'Pages/CardPage.dart';
 import 'Pages/HomePage.dart';
-import 'Pages/ItemPage.dart';
 import 'Pages/Splash Screen/Splash Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +44,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
               "/": (context) => SplashScreen(),
               "signIn": (context) => SignInPage(),
-              "signUp": (context) => SignUpPage(),
+              "signUp": (context) => SignUpScreen(),
               "resetPassword": (context) => ResetPassword(),
               "homePage": (context) => HomePage(),
               "cartPage": (context) => CartPage(),

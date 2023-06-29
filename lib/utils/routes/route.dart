@@ -15,7 +15,7 @@ const String resetPassword = "/reset_password.dart";
 late User _user;
 List<GetPage> getPages = [
   GetPage(name: splash, page: () =>SplashScreen()),
-  GetPage(name: signUp, page: () => SignUpPage()),
+  GetPage(name: signUp, page: () => SignUpScreen()),
   GetPage(name: signIn, page: () => SignInPage()),
   GetPage(name: resetPassword, page: () => ResetPassword()),
 ];

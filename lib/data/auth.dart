@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food_delivery_app/utils/routes/route.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,14 +20,11 @@ class AuthController extends GetxController {
     required String name,
     required String email,
     required String password,
-    required String address,
-    required String image,
   }) async {
     try {
       if (name.isNotEmpty &&
           email.isNotEmpty &&
-          password.isNotEmpty &&
-          address.isNotEmpty) {
+          password.isNotEmpty) {
         UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
@@ -47,8 +45,8 @@ class AuthController extends GetxController {
           uid: userCredential.user!.uid,
           email: email,
           phoneNumber: "",
-          address: address,
-          image: image,
+          address: "",
+          image: "",
         );
         // Save user info in Firebase
         await FirebaseFirestore.instance
@@ -56,7 +54,7 @@ class AuthController extends GetxController {
             .doc(userCredential.user!.uid)
             .set(userModel.toJson());
 
-        // Get.toNamed(signIn);
+        Get.toNamed(signIn);
       } else {
         Fluttertoast.showToast(msg: 'Please enter all the fields');
       }
