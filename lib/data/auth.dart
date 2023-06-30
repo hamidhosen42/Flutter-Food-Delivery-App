@@ -16,15 +16,14 @@ class AuthController extends GetxController {
   //for button loading indicator
   var isLoading = false.obs;
 
-  Future<void> registration({
+  Future registration({
+    required BuildContext context,
     required String name,
     required String email,
     required String password,
   }) async {
     try {
-      if (name.isNotEmpty &&
-          email.isNotEmpty &&
-          password.isNotEmpty) {
+      if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
         UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
@@ -39,6 +38,7 @@ class AuthController extends GetxController {
         // No redirect to home screen yet
         // After saving user info, check email verification status
         bool isEmailVerified = userCredential.user!.emailVerified;
+        var authCredential = userCredential.user;
 
         UserModel userModel = UserModel(
           name: name,
@@ -54,7 +54,7 @@ class AuthController extends GetxController {
             .doc(userCredential.user!.uid)
             .set(userModel.toJson());
 
-        Get.toNamed(signIn);
+        Navigator.pushNamed(context, "signIn");
       } else {
         Fluttertoast.showToast(msg: 'Please enter all the fields');
       }
@@ -83,6 +83,7 @@ class AuthController extends GetxController {
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
         var authCredential = userCredential.user;
+
         if (authCredential!.uid.isNotEmpty) {
           if (authCredential.emailVerified) {
             Fluttertoast.showToast(msg: 'Login Successful');

@@ -227,6 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       authController.isLoading(true);
 
                       await authController.registration(
+                        context: context,
                         name: _nameController.text,
                         email: _emailController.text,
                         password: _passwordController.text,
