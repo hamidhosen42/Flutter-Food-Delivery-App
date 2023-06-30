@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, avoid_print
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,15 +80,17 @@ class _CategoriesItemState extends State<CategoriesItem> {
                         topLeft: Radius.circular(7.r),
                         topRight: Radius.circular(7.r),
                       ),
-                      child: widget.img_url[index] != null
-                          ? Image.network(
-                              widget.img_url[index],
+                      child:  CachedNetworkImage(
+                              imageUrl: widget.img_url[index],
                               height: 80.h,
                               width: double.infinity,
                               fit: BoxFit.cover,
-                            )
-                          : CircularProgressIndicator(
-                              color: Colors.blue,
+                              filterQuality: FilterQuality.high,
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(color: Colors.redAccent,),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                     ),
                     SizedBox(
@@ -136,7 +139,7 @@ class _CategoriesItemState extends State<CategoriesItem> {
                         children: [
                           Text(
                             "\$${widget.price[index]}",
-                            style: TextStyle(fontSize: 18.sp),
+                            style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w500),
                           ),
                           SizedBox(
                             width: 5.w,
