@@ -7,6 +7,7 @@ import 'package:food_delivery_app/res/color.dart';
 import 'Pages/AuthPage/SignInPage.dart';
 import 'Pages/AuthPage/SignUpPage.dart';
 import 'Pages/CardPage.dart';
+import 'Pages/HomePage/CategoriesItem.dart';
 import 'Pages/HomePage/HomePage.dart';
 import 'Pages/Splash Screen/Splash Screen.dart';
 import 'package:firebase_core/firebase_core.dart';

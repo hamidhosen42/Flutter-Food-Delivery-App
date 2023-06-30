@@ -1,7 +1,8 @@
-// ignore_for_file: avoid_unnecessary_containers, sort_child_properties_last, prefer_const_constructors, non_constant_identifier_names
+// ignore_for_file: avoid_unnecessary_containers, sort_child_properties_last, prefer_const_constructors, non_constant_identifier_names, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Pages/HomePage/CategoriesItem.dart';
 
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({Key? key}) : super(key: key);
@@ -11,8 +12,7 @@ class CategoriesWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 5),
       child: StreamBuilder(
-        // stream: c.isState.value==0?FirebaseFirestore.instance.collection('home-screen').snapshots():FirebaseFirestore.instance.collection('home-screen').where('categories',isEqualTo: c.productName.value).snapshots(),
-        stream: FirebaseFirestore.instance.collection('newest_ttems').snapshots(),
+        stream: FirebaseFirestore.instance.collection('categories').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Something went wrong'));
@@ -27,14 +27,20 @@ class CategoriesWidget extends StatelessWidget {
                 DocumentSnapshot document = snapshot.data!.docs[index];
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                var name = data['name'];
-                var id = data['id'];
+
+                    var img_url = data['img_url'] != null ? data['img_url'] as List<dynamic> : [];
+                    var name = data['name'] != null ? data['name'] as List<dynamic> : [];
+                    var categorie_name =data['categorie_name'];
+                    var rating = data['rating'] != null ? data['rating'] as List<dynamic> : [];
+                    var price = data['price'] != null ? data['price'] as List<dynamic> : [];
                 return InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "itemPage");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => CategoriesItem(categorie_name:categorie_name,img_url:img_url,name:name,rating:rating,price:price)));
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child: Container(
                       child: Image.network(
                         data['img'],

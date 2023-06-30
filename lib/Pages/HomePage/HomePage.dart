@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
             // !---------------carouselImages-----------
             CarouselImages(),
 
-            // ---------category----------
+            //! ---------------category-----------------
             Padding(
               padding: EdgeInsets.only(left: 10, top: 5),
               child: Text(
