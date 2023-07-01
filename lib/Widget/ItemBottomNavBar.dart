@@ -1,9 +1,19 @@
-// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, use_key_in_widget_constructors
+// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ItemBottomNavBar extends StatelessWidget {
+class ItemBottomNavBar extends StatefulWidget {
+
+  final int total;
+
+  ItemBottomNavBar({required this.total});
+
+  @override
+  State<ItemBottomNavBar> createState() => _ItemBottomNavBarState();
+}
+
+class _ItemBottomNavBarState extends State<ItemBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -31,7 +41,7 @@ class ItemBottomNavBar extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                "\$80",
+                widget.total.toString(),
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

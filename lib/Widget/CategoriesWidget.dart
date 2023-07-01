@@ -43,6 +43,8 @@ class CategoriesWidget extends StatelessWidget {
                     data['price'] != null ? data['price'] as List<dynamic> : [];
                 var subtitle =
                     data['subtitle'] != null ? data['subtitle'] as List<dynamic> : [];
+                var details =
+                    data['details'] != null ? data['details'] as List<dynamic> : [];
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -53,7 +55,7 @@ class CategoriesWidget extends StatelessWidget {
                                 img_url: img_url,
                                 name: name,
                                 rating: rating,
-                                price: price,subtitle:subtitle)));
+                                price: price,subtitle:subtitle,details:details)));
                   },
                   child: Padding(
                     padding:

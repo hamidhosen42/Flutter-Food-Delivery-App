@@ -14,6 +14,7 @@ class CategoriesItem extends StatefulWidget {
   final List rating;
   final List price;
   final List subtitle;
+  final List details;
 
   CategoriesItem(
       {required this.categorie_name,
@@ -22,6 +23,7 @@ class CategoriesItem extends StatefulWidget {
       required this.rating,
       required this.price,
       required this.subtitle,
+      required this.details,
       });
 
   @override
@@ -58,7 +60,9 @@ class _CategoriesItemState extends State<CategoriesItem> {
                 Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => ItemPage(name:widget.name[index], rating:widget.rating[index], price:widget.price[index], subText:widget.subtitle[index], imageUrl:widget.img_url[index])));
+                            builder: (_) => ItemPage(name:widget.name[index], rating:widget.rating[index], price:widget.price[index], subText:widget.subtitle[index], imageUrl:widget.img_url[index],
+                            details :widget.details[index]
+                            )));
               },
               child: Container(
                 decoration: BoxDecoration(
