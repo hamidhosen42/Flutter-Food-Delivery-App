@@ -1,23 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/Pages/AuthPage/reset_password.dart';
 import 'package:food_delivery_app/res/app_string.dart';
 import 'package:food_delivery_app/res/color.dart';
 import 'package:food_delivery_app/utils/routes/route.dart';
-
-import 'Pages/AuthPage/SignInPage.dart';
-import 'Pages/AuthPage/SignUpPage.dart';
-import 'Pages/CardPage.dart';
-import 'Pages/HomePage/CategoriesItem.dart';
-import 'Pages/HomePage/HomePage.dart';
 import 'Pages/Splash Screen/Splash Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+    Stripe.publishableKey =
+      'pk_test_51L27YbK8JICyYw6jEoE5r8yiYV1s6mdUamcHJ9FJfvSe8EhRJzhRtGDwxdLLsZ4sbuCXms7heljCmPXfOnbJzwUQ00GchfnRDq';
+      
   runApp(MyApp());
 }
 

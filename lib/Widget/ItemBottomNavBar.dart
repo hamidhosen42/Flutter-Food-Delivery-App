@@ -3,8 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ItemBottomNavBar extends StatefulWidget {
+import '../payment/payment_controller.dart';
 
+class ItemBottomNavBar extends StatefulWidget {
   final int total;
 
   ItemBottomNavBar({required this.total});
@@ -14,6 +15,8 @@ class ItemBottomNavBar extends StatefulWidget {
 }
 
 class _ItemBottomNavBarState extends State<ItemBottomNavBar> {
+  var obj = PaymentController();
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -50,7 +53,9 @@ class _ItemBottomNavBarState extends State<ItemBottomNavBar> {
             ],
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              obj.makePayment(amount: widget.total.toString(), currency: 'USD');
+            },
             child: Row(
               children: [
                 Icon(CupertinoIcons.cart),
