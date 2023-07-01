@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery_app/Pages/ItemPage.dart';
 import 'package:food_delivery_app/res/color.dart';
 
 class CategoriesItem extends StatefulWidget {
@@ -12,13 +13,16 @@ class CategoriesItem extends StatefulWidget {
   final List name;
   final List rating;
   final List price;
+  final List subtitle;
 
   CategoriesItem(
       {required this.categorie_name,
       required this.img_url,
       required this.name,
       required this.rating,
-      required this.price});
+      required this.price,
+      required this.subtitle,
+      });
 
   @override
   State<CategoriesItem> createState() => _CategoriesItemState();
@@ -51,20 +55,12 @@ class _CategoriesItemState extends State<CategoriesItem> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (_) => DetailScreen(
-                //             location: location,
-                //             duration: duration,
-                //             description: description,
-                //             name: name,
-                //             imageList: imageList,
-                //             eat_hotal: eat_hotal)));
+                Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => ItemPage(name:widget.name[index], rating:widget.rating[index], price:widget.price[index], subText:widget.subtitle[index], imageUrl:widget.img_url[index])));
               },
               child: Container(
-                // width: 120.w,
-                // height: 500.h,
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.all(

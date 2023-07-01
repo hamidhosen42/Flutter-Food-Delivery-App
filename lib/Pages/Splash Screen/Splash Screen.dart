@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery_app/utils/routes/route.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -31,10 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (user != null ) {
       Timer(const Duration(seconds: 1),
-          () => Navigator.pushNamed(context, "homePage"));
+          () =>  Get.toNamed(home_page));
     } else {
       Timer(const Duration(seconds: 1),
-          () => Navigator.pushNamed(context, "signIn"));
+          () => Get.toNamed(signIn));
     }
   }
 

@@ -1,22 +1,29 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_key_in_widget_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables, must_be_immutable, import_of_legacy_library_into_null_safe
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Widget/AppBarWidget.dart';
 import 'package:food_delivery_app/Widget/DrawerWidget.dart';
 import '../Widget/ItemBottomNavBar.dart';
 // import 'package:clippy_flutter/clippy_flutter.dart';
 
 class ItemPage extends StatefulWidget {
-  final String names;
+  final String name;
   final int rating;
-  final String price;
+  final int price;
   final String subText;
   final String imageUrl;
 
-  ItemPage(this.names, this.rating, this.price, this.subText, this.imageUrl);
+  ItemPage(
+      {required this.name,
+      required this.rating,
+      required this.price,
+      required this.subText,
+      required this.imageUrl});
 
   @override
   State<ItemPage> createState() => _ItemPageState();
@@ -31,10 +38,18 @@ class _ItemPageState extends State<ItemPage> {
           AppBarWidget(),
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: Image.network(
-              widget.imageUrl,
-              height: 250,
+            child: CachedNetworkImage(
+              imageUrl: widget.imageUrl,
+              height: 250.h,
               width: double.infinity,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.redAccent,
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           Arc(
@@ -81,7 +96,7 @@ class _ItemPageState extends State<ItemPage> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: widget.price, // Price value
+                                  text: widget.price.toString(), // Price value
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -99,7 +114,7 @@ class _ItemPageState extends State<ItemPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(widget.names,
+                          Text(widget.name,
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold)),
                           Container(

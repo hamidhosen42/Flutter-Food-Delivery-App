@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Pages/AuthPage/reset_password.dart';
 import 'package:food_delivery_app/res/app_string.dart';
 import 'package:food_delivery_app/res/color.dart';
+import 'package:food_delivery_app/utils/routes/route.dart';
 
 import 'Pages/AuthPage/SignInPage.dart';
 import 'Pages/AuthPage/SignUpPage.dart';
@@ -41,15 +42,9 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               scaffoldBackgroundColor: AppColors.scaffold_background_color,
             ),
-            // getPages: getPages,
-            routes: {
-              "/": (context) => SplashScreen(),
-              "signIn": (context) => SignInPage(),
-              "signUp": (context) => SignUpScreen(),
-              "resetPassword": (context) => ResetPassword(),
-              "homePage": (context) => HomePage(),
-              "cartPage": (context) => CartPage(),
-            },
+            initialRoute: splash,
+            getPages: getPages,
+            home: SplashScreen(),
           );
         });
   }

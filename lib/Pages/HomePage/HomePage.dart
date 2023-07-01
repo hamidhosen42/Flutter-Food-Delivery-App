@@ -61,6 +61,7 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
+            
             CategoriesWidget(),
 
             // ---------popular Items Widget----------

@@ -9,7 +9,6 @@ import 'package:food_delivery_app/res/color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResetPassword extends StatefulWidget {
-  static const routeName = '/reset-password';
 
   @override
   State<ResetPassword> createState() => _ResetPasswordState();

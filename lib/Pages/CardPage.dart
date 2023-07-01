@@ -3,9 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_delivery_app/Pages/ItemPage.dart';
 
 import '../Widget/AppBarWidget.dart';
 import '../Widget/CartBottomNavBar.dart';

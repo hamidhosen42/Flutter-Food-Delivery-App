@@ -15,7 +15,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../Widget/violetButton.dart';
 import '../../data/auth.dart';
 import '../../styles/styles.dart';
-import '../../utils/routes/route.dart';
 import '../../controllers/text_field_controller.dart';
 
 class SignInPage extends StatefulWidget {

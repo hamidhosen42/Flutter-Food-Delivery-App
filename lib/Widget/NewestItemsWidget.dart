@@ -35,11 +35,11 @@ class NewestItemsWidget extends StatelessWidget {
             var subText = data['subText'];
             return InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (_) => ItemPage(
-                            names, rating, price, subText, data['img'])));
+                // Navigator.push(
+                //     context,
+                //     CupertinoPageRoute(
+                //         builder: (_) => ItemPage(
+                //             names, rating, price, subText, data['img'])));
               },
               child: Padding(
                 padding:
