@@ -2,9 +2,12 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../Pages/PopularItemPage.dart';
 
 class PopularItemWidget extends StatelessWidget {
   const PopularItemWidget({Key? key}) : super(key: key);
@@ -30,17 +33,17 @@ class PopularItemWidget extends StatelessWidget {
                 DocumentSnapshot document = snapshot.data!.docs[index];
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                // var names = data['name'];
-                // var rating = data['rating'];
-                // var price = data['price'];
-                // var subText = data['subText'];
+                var name = data['name'];
+                var rating = data['rating'];
+                var price = data['price'];
+                var details = data['details'];
                 return InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     CupertinoPageRoute(
-                    //         builder: (_) =>
-                    //             ItemPage(names, rating, price, subText,data['img'])));
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (_) =>
+                                PopularItemPage(name:name, rating:rating, price:price, details:details,imageUrl:data['img'])));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
