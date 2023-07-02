@@ -18,6 +18,7 @@ class PopularItemPage extends StatefulWidget {
   final int price;
   final String details;
   final String imageUrl;
+  
 
   PopularItemPage({
     required this.name,

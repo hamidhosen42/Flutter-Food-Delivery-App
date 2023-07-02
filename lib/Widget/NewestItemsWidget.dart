@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, avoid_unnecessary_containers, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, avoid_unnecessary_containers, sized_box_for_whitespace, use_key_in_widget_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Pages/ItemPage.dart';
+import '../Pages/PopularItemPage.dart';
 
 class NewestItemsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      // stream: c.isState.value==0?FirebaseFirestore.instance.collection('home-screen').snapshots():FirebaseFirestore.instance.collection('home-screen').where('categories',isEqualTo: c.productName.value).snapshots(),
-      stream: FirebaseFirestore.instance.collection('newest_ttems').snapshots(),
+      stream: FirebaseFirestore.instance.collection('popular_food').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text('Something went wrong'));
@@ -29,17 +30,21 @@ class NewestItemsWidget extends StatelessWidget {
             DocumentSnapshot document = snapshot.data!.docs[index];
             Map<String, dynamic> data =
                 document.data()! as Map<String, dynamic>;
-            var names = data['name'];
-            var rating = data['rating'];
-            var price = data['price'];
-            var subText = data['subText'];
+                var name = data['name'];
+                var rating = data['rating'];
+                var price = data['price'];
+                var details = data['details'];
             return InkWell(
               onTap: () {
-                // Navigator.push(
-                //     context,
-                //     CupertinoPageRoute(
-                //         builder: (_) => ItemPage(
-                //             names, rating, price, subText, data['img'])));
+               Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (_) => PopularItemPage(
+                                name: name,
+                                rating: rating,
+                                price: price,
+                                details: details,
+                                imageUrl: data['img'])));
               },
               child: Padding(
                 padding:
@@ -63,13 +68,24 @@ class NewestItemsWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        height: 150.h,
+                        height: 100.h,
                         width: 120.w,
-                        child: Image.network(
-                          data['img'],
-                        ),
+                        child: CachedNetworkImage(
+                              imageUrl: data['img'],
+                              height: 100.h,
+                        width: 120.w,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.high,
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
                       ),
-                      SizedBox(width: 5),
+                      SizedBox(width: 5.w),
                       Container(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +103,7 @@ class NewestItemsWidget extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  SizedBox(width: 10.w),
                                   Icon(
                                     Icons.favorite_outline,
                                     color: Colors.red,
@@ -96,7 +112,7 @@ class NewestItemsWidget extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 5.h),
+                            SizedBox(height: 10.h),
                             Container(
                               width: 180.w,
                               child: Text(
@@ -126,7 +142,7 @@ class NewestItemsWidget extends StatelessWidget {
                                 print(rating);
                               },
                             ),
-                            SizedBox(height: 5.h),
+                            SizedBox(height: 10.h),
                             Container(
                               width: 200.w,
                               child: Row(
@@ -145,7 +161,7 @@ class NewestItemsWidget extends StatelessWidget {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: data['price'], // Price value
+                                          text: data['price'].toString(), // Price value
                                           style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,

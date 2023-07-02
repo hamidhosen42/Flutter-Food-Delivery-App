@@ -42,29 +42,37 @@ class PopularItemWidget extends StatelessWidget {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                            builder: (_) =>
-                                PopularItemPage(name:name, rating:rating, price:price, details:details,imageUrl:data['img'])));
+                            builder: (_) => PopularItemPage(
+                                name: name,
+                                rating: rating,
+                                price: price,
+                                details: details,
+                                imageUrl: data['img'])));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: Container(
-                      height: 200.h,
+                      height: 190.h,
                       width: 150.w,
                       // ignore: sort_child_properties_last
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 90.h,
-                            alignment: Alignment.center,
-                            child:  CachedNetworkImage(
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(7.r),
+                              topRight: Radius.circular(7.r),
+                            ),
+                            child: CachedNetworkImage(
                               imageUrl: data['img'],
                               height: 80.h,
                               width: double.infinity,
                               fit: BoxFit.cover,
                               filterQuality: FilterQuality.high,
                               placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(color: Colors.redAccent,),
+                                child: CircularProgressIndicator(
+                                  color: Colors.redAccent,
+                                ),
                               ),
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
@@ -123,7 +131,8 @@ class PopularItemWidget extends StatelessWidget {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: data['price'].toString(), // Price value
+                                      text: data['price']
+                                          .toString(), // Price value
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
