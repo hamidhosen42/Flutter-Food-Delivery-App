@@ -1,11 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_delivery_app/Pages/ItemPage.dart';
 
 class PopularItemWidget extends StatelessWidget {
   const PopularItemWidget({Key? key}) : super(key: key);
@@ -15,9 +14,8 @@ class PopularItemWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 5),
       child: StreamBuilder(
-        // stream: c.isState.value==0?FirebaseFirestore.instance.collection('home-screen').snapshots():FirebaseFirestore.instance.collection('home-screen').where('categories',isEqualTo: c.productName.value).snapshots(),
         stream:
-            FirebaseFirestore.instance.collection('newest_ttems').snapshots(),
+            FirebaseFirestore.instance.collection('popular_food').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Something went wrong'));
@@ -32,10 +30,10 @@ class PopularItemWidget extends StatelessWidget {
                 DocumentSnapshot document = snapshot.data!.docs[index];
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                var names = data['name'];
-                var rating = data['rating'];
-                var price = data['price'];
-                var subText = data['subText'];
+                // var names = data['name'];
+                // var rating = data['rating'];
+                // var price = data['price'];
+                // var subText = data['subText'];
                 return InkWell(
                   onTap: () {
                     // Navigator.push(
@@ -56,8 +54,17 @@ class PopularItemWidget extends StatelessWidget {
                           Container(
                             height: 90.h,
                             alignment: Alignment.center,
-                            child: Image.network(
-                              data['img'],
+                            child:  CachedNetworkImage(
+                              imageUrl: data['img'],
+                              height: 80.h,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.high,
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(color: Colors.redAccent,),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                           ),
                           Text(
@@ -113,7 +120,7 @@ class PopularItemWidget extends StatelessWidget {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: data['price'], // Price value
+                                      text: data['price'].toString(), // Price value
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
