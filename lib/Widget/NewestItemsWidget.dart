@@ -70,20 +70,26 @@ class NewestItemsWidget extends StatelessWidget {
                       Container(
                         height: 100.h,
                         width: 120.w,
-                        child: CachedNetworkImage(
-                              imageUrl: data['img'],
-                              height: 100.h,
-                        width: 120.w,
-                              fit: BoxFit.cover,
-                              filterQuality: FilterQuality.high,
-                              placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.redAccent,
-                                ),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(7.r),
+                              topRight: Radius.circular(7.r),
                             ),
+                          child: CachedNetworkImage(
+                                imageUrl: data['img'],
+                                height: 100.h,
+                          width: 120.w,
+                                fit: BoxFit.cover,
+                                filterQuality: FilterQuality.high,
+                                placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                        ),
                       ),
                       SizedBox(width: 5.w),
                       Container(
