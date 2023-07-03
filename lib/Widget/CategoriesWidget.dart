@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Pages/HomePage/CategoriesItem.dart';
 
+import '../main.dart';
+
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({Key? key}) : super(key: key);
 
@@ -41,10 +43,12 @@ class CategoriesWidget extends StatelessWidget {
                     : [];
                 var price =
                     data['price'] != null ? data['price'] as List<dynamic> : [];
-                var subtitle =
-                    data['subtitle'] != null ? data['subtitle'] as List<dynamic> : [];
-                var details =
-                    data['details'] != null ? data['details'] as List<dynamic> : [];
+                var subtitle = data['subtitle'] != null
+                    ? data['subtitle'] as List<dynamic>
+                    : [];
+                var details = data['details'] != null
+                    ? data['details'] as List<dynamic>
+                    : [];
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -55,7 +59,9 @@ class CategoriesWidget extends StatelessWidget {
                                 img_url: img_url,
                                 name: name,
                                 rating: rating,
-                                price: price,subtitle:subtitle,details:details)));
+                                price: price,
+                                subtitle: subtitle,
+                                details: details)));
                   },
                   child: Padding(
                     padding:
@@ -78,10 +84,16 @@ class CategoriesWidget extends StatelessWidget {
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
+                          color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.grey[100]
+                              : Colors.grey.shade900,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
+                              color: themeManager.themeMode == ThemeMode.light
+                                  ? Colors.grey.withOpacity(0.5)
+                                  : Colors.grey.shade900,
+
+                              // color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 2,
                               blurRadius: 10,
                               offset: Offset(0, 3),

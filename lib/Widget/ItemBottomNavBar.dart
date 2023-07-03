@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import '../payment/payment_controller.dart';
 
 class ItemBottomNavBar extends StatefulWidget {
@@ -22,10 +23,14 @@ class _ItemBottomNavBarState extends State<ItemBottomNavBar> {
     return BottomAppBar(
       child: Container(
         decoration: BoxDecoration(
-            color: Color.fromARGB(255, 231, 231, 213),
+          color: themeManager.themeMode == ThemeMode.light
+                              ? Color.fromARGB(255, 231, 231, 213)
+                              : Colors.grey.shade900,
             boxShadow: [
               BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                 color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.grey.withOpacity(0.5)
+                              : Colors.grey.shade900,
                   blurRadius: 10,
                   spreadRadius: 3,
                   offset: Offset(0, 3)),

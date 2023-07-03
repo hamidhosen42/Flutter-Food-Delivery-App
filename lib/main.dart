@@ -9,6 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
+import 'theme/theme.dart';
+import 'theme/theme_manager.dart';
+
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -26,7 +29,30 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+ThemeManager themeManager = ThemeManager(ThemeMode.light);
+
 class _MyAppState extends State<MyApp> {
+
+    @override
+  void dispose() {
+    themeManager.removeListener(themelistener);
+
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    themeManager.loadTheme();
+    themeManager.addListener(themelistener);
+
+    super.initState();
+  }
+
+    themelistener() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -35,6 +61,9 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
+                          // theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: themeManager.themeMode,
             debugShowCheckedModeBanner: false,
             title: AppString.app_title,
             theme: ThemeData(

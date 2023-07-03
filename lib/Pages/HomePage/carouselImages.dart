@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../main.dart';
+
 class CarouselImages extends StatefulWidget {
   const CarouselImages({super.key});
 
@@ -55,7 +57,7 @@ class _CarouselImagesState extends State<CarouselImages> {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.greenAccent,
+                        // color: Colors.greenAccent,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           image: AssetImage(image),
@@ -69,16 +71,24 @@ class _CarouselImagesState extends State<CarouselImages> {
             },
           ),
 
-                      SizedBox(
-              height: 5.h,
-            ),
-            Obx(
-              () => DotsIndicator(
-                dotsCount:
-                    _carouselImages.length == 0 ? 1 : _carouselImages.length,
-                position: _currentIndex.value.toDouble(),
+          SizedBox(
+            height: 5.h,
+          ),
+          Obx(
+            () => DotsIndicator(
+              decorator: DotsDecorator(
+                color: themeManager.themeMode == ThemeMode.light
+                ? Colors.grey.shade500
+                : Colors.grey.shade300, // Inactive color
+                activeColor: themeManager.themeMode == ThemeMode.light
+                ? Colors.blue
+                : Colors.red,
               ),
+              dotsCount:
+                  _carouselImages.length == 0 ? 1 : _carouselImages.length,
+              position: _currentIndex.value.toDouble(),
             ),
+          ),
         ],
       ),
     );

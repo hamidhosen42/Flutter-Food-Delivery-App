@@ -6,9 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../Pages/ItemPage.dart';
 import '../Pages/PopularItemPage.dart';
+import '../main.dart';
 
 class NewestItemsWidget extends StatelessWidget {
   @override
@@ -57,7 +56,9 @@ class NewestItemsWidget extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
+                     color: themeManager.themeMode == ThemeMode.light
+                ? Colors.white
+                : Colors.grey.shade900,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -109,12 +110,17 @@ class NewestItemsWidget extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
+                                      color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
                                     ),
                                   ),
                                   SizedBox(width: 10.w),
                                   Icon(
                                     Icons.favorite_outline,
-                                    color: Colors.red,
+                                    color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.red
+                              : Colors.white,
                                     size: 25.sp,
                                   ),
                                 ],
@@ -129,6 +135,9 @@ class NewestItemsWidget extends StatelessWidget {
                                     : data['subtitle'],
                                 style: TextStyle(
                                   fontSize: 12.sp,
+                                 color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
                                 ),
                               ),
                             ),

@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Pages/ItemPage.dart';
 import 'package:food_delivery_app/res/color.dart';
 
+import '../../main.dart';
+
 class CategoriesItem extends StatefulWidget {
   final String categorie_name;
   final List img_url;
@@ -16,15 +18,15 @@ class CategoriesItem extends StatefulWidget {
   final List subtitle;
   final List details;
 
-  CategoriesItem(
-      {required this.categorie_name,
-      required this.img_url,
-      required this.name,
-      required this.rating,
-      required this.price,
-      required this.subtitle,
-      required this.details,
-      });
+  CategoriesItem({
+    required this.categorie_name,
+    required this.img_url,
+    required this.name,
+    required this.rating,
+    required this.price,
+    required this.subtitle,
+    required this.details,
+  });
 
   @override
   State<CategoriesItem> createState() => _CategoriesItemState();
@@ -35,14 +37,26 @@ class _CategoriesItemState extends State<CategoriesItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.scaffold_background_color,
+        backgroundColor: themeManager.themeMode == ThemeMode.light
+            ? AppColors.scaffold_background_color
+            : Colors.grey.shade900,
+        // backgroundColor: AppColors.scaffold_background_color,
         centerTitle: true,
-        elevation: 2,
+        elevation: 0,
         title: Text(
           widget.categorie_name,
-          style: TextStyle(fontSize: 25.sp, color: Colors.black),
+          style: TextStyle(
+            fontSize: 25.sp,
+            color: themeManager.themeMode == ThemeMode.light
+                ? Colors.grey.shade900
+                : Colors.white,
+          ),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(
+          color: themeManager.themeMode == ThemeMode.light
+              ? Colors.grey.shade900
+              : Colors.white,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -58,15 +72,22 @@ class _CategoriesItemState extends State<CategoriesItem> {
             return InkWell(
               onTap: () {
                 Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => ItemPage(name:widget.name[index], rating:widget.rating[index], price:widget.price[index], subText:widget.subtitle[index], imageUrl:widget.img_url[index],
-                            details :widget.details[index]
-                            )));
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ItemPage(
+                            name: widget.name[index],
+                            rating: widget.rating[index],
+                            price: widget.price[index],
+                            subText: widget.subtitle[index],
+                            imageUrl: widget.img_url[index],
+                            details: widget.details[index])));
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: themeManager.themeMode == ThemeMode.light
+                      ? Colors.grey[100]
+                      : Colors.grey.shade900,
+                  // color: Colors.grey[100],
                   borderRadius: BorderRadius.all(
                     Radius.circular(7.r),
                   ),
@@ -80,18 +101,20 @@ class _CategoriesItemState extends State<CategoriesItem> {
                         topLeft: Radius.circular(7.r),
                         topRight: Radius.circular(7.r),
                       ),
-                      child:  CachedNetworkImage(
-                              imageUrl: widget.img_url[index],
-                              height: 80.h,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              filterQuality: FilterQuality.high,
-                              placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(color: Colors.redAccent,),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.img_url[index],
+                        height: 80.h,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        filterQuality: FilterQuality.high,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -99,11 +122,15 @@ class _CategoriesItemState extends State<CategoriesItem> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Text(
-                        widget.name[index],
+                        widget.name[index].length > 20
+                            ? widget.name[index].substring(0, 17) + '...'
+                            : widget.name[index],
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       ),
                     ),
@@ -122,7 +149,9 @@ class _CategoriesItemState extends State<CategoriesItem> {
                         itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                         itemBuilder: (context, _) => Icon(
                           Icons.star,
-                          color: Colors.red,
+                          color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.red
+                              : Colors.red,
                         ),
                         onRatingUpdate: (rating) {
                           print(rating);
@@ -139,14 +168,21 @@ class _CategoriesItemState extends State<CategoriesItem> {
                         children: [
                           Text(
                             "\$${widget.price[index]}",
-                            style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w500,
+                                color: themeManager.themeMode == ThemeMode.light
+                                    ? Colors.red
+                                    : Colors.red),
                           ),
                           SizedBox(
                             width: 5.w,
                           ),
                           Icon(
                             Icons.favorite_border,
-                            color: Colors.black,
+                            color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
                           )
                         ],
                       ),

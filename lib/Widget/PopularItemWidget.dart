@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Pages/PopularItemPage.dart';
+import '../main.dart';
 
 class PopularItemWidget extends StatelessWidget {
   const PopularItemWidget({Key? key}) : super(key: key);
@@ -80,13 +81,20 @@ class PopularItemWidget extends StatelessWidget {
                                   const Icon(Icons.error),
                             ),
                           ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
                           Text(
                             data['name'],
                             style: TextStyle(
-                                fontSize: 18.sp, fontWeight: FontWeight.bold),
+                                fontSize: 16.sp, fontWeight: FontWeight.w600,
+                                color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
+                                ),
                           ),
                           SizedBox(
-                            height: 5.h,
+                            height: 2.h,
                           ),
                           Text(
                             data['subtitle'].length > 20
@@ -94,6 +102,9 @@ class PopularItemWidget extends StatelessWidget {
                                 : data['subtitle'],
                             style: TextStyle(
                               fontSize: 12.sp,
+                              color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
                             ),
                           ),
                           SizedBox(
@@ -146,7 +157,9 @@ class PopularItemWidget extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.favorite_outline,
-                                color: Colors.red,
+                                color: themeManager.themeMode == ThemeMode.light
+                ? Colors.red
+                : Colors.white,
                               )
                             ],
                           )
@@ -155,10 +168,14 @@ class PopularItemWidget extends StatelessWidget {
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
+                         color: themeManager.themeMode == ThemeMode.light
+                      ? Colors.white
+                      : Colors.grey.shade900,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
+                               color: themeManager.themeMode == ThemeMode.light
+                                  ? Colors.grey.withOpacity(0.5)
+                                  : Colors.grey.shade900,
                               spreadRadius: 2,
                               blurRadius: 10,
                               offset: Offset(0, 3),

@@ -12,6 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_delivery_app/Widget/AppBarWidget.dart';
 import 'package:food_delivery_app/Pages/DrawerWidget/DrawerWidget.dart';
 import '../Widget/ItemBottomNavBar.dart';
+import '../main.dart';
 import '../res/color.dart';
 // import 'package:clippy_flutter/clippy_flutter.dart';
 
@@ -103,7 +104,9 @@ class _ItemPageState extends State<ItemPage> {
                           ? Icon(
                               Icons.favorite_border,
                               size: 30,
-                              color: Colors.black,
+                              color: themeManager.themeMode == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
                             )
                           : Icon(
                               Icons.favorite_border,
@@ -121,14 +124,23 @@ class _ItemPageState extends State<ItemPage> {
             ),
           ),
         ],
-        backgroundColor: AppColors.scaffold_background_color,
+        backgroundColor: themeManager.themeMode == ThemeMode.light
+            ? AppColors.scaffold_background_color
+            : Colors.grey.shade900,
         centerTitle: true,
         elevation: 0,
         title: Text(
           widget.name,
-          style: TextStyle(fontSize: 20.sp, color: Colors.black),
+          style: TextStyle(
+              fontSize: 20.sp,
+              color: themeManager.themeMode == ThemeMode.light
+                  ? Colors.black
+                  : Colors.white),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(
+            color: themeManager.themeMode == ThemeMode.light
+                ? Colors.black
+                : Colors.white),
       ),
       body: ListView(
         children: [
@@ -157,7 +169,9 @@ class _ItemPageState extends State<ItemPage> {
             height: 10,
             child: Container(
               width: double.infinity,
-              color: Colors.white,
+              color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.white
+                              : Colors.grey.shade900,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
@@ -177,7 +191,9 @@ class _ItemPageState extends State<ItemPage> {
                             itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                             itemBuilder: (context, _) => Icon(
                               Icons.star,
-                              color: Colors.red,
+                              color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.red
+                              : Colors.red,
                             ),
                             onRatingUpdate: (rating) {
                               print(rating);

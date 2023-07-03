@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../Widget/AppBarWidget.dart';
 import '../../Widget/CategoriesWidget.dart';
+import '../../main.dart';
 import '../DrawerWidget/DrawerWidget.dart';
 import '../../Widget/NewestItemsWidget.dart';
 import '../../Widget/PopularItemWidget.dart';
@@ -107,10 +108,12 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, "cartPage");
             },
-            backgroundColor: Colors.white,
+            backgroundColor:Colors.white,
             child: Icon(
               CupertinoIcons.cart,
-              color: Colors.red,
+               color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.red
+                              : Colors.black,
               size: 30,
             ),
           ),

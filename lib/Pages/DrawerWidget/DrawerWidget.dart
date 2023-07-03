@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Pages/DrawerWidget/favourite_screen.dart';
+import 'package:food_delivery_app/Pages/DrawerWidget/theme_screen.dart';
 import 'package:food_delivery_app/Pages/HomePage/HomePage.dart';
 import '../profile/profile_screen.dart';
 
@@ -130,11 +131,17 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(CupertinoIcons.settings, color: Colors.red),
-            title: Text(
-              "Setting",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: (){
+               Navigator.push(
+                  context, CupertinoPageRoute(builder: (_) => ThemeScreen()));
+            },
+            child: ListTile(
+              leading: Icon(CupertinoIcons.settings, color: Colors.red),
+              title: Text(
+                "Setting",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           ListTile(

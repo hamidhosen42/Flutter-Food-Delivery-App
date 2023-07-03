@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Pages/profile/profile_edit_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../main.dart';
 import '../../res/color.dart';
 
 class MyAccount extends StatefulWidget {
@@ -23,14 +24,26 @@ class _MyAccountState extends State<MyAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.scaffold_background_color,
+        backgroundColor: themeManager.themeMode == ThemeMode.light
+            ? AppColors.scaffold_background_color
+            : Colors.grey.shade900,
+        // backgroundColor: AppColors.scaffold_background_color,
         centerTitle: true,
         elevation: 0,
         title: Text(
           "PROFILE",
-          style: TextStyle(fontSize: 25.sp, color: Colors.black),
+          style: TextStyle(
+            fontSize: 25.sp,
+            color: themeManager.themeMode == ThemeMode.light
+                ? Colors.grey.shade900
+                : Colors.white,
+          ),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(
+          color: themeManager.themeMode == ThemeMode.light
+              ? Colors.grey.shade900
+              : Colors.white,
+        ),
       ),
         body: Padding(
       padding: const EdgeInsets.all(10.0),
@@ -54,7 +67,9 @@ class _MyAccountState extends State<MyAccount> {
                   width: double.infinity,
                   child: Card(
                     elevation: 3,
-                    color: Colors.white,
+                    color: themeManager.themeMode == ThemeMode.light
+                ? Colors.white
+                : Colors.grey.shade900,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(

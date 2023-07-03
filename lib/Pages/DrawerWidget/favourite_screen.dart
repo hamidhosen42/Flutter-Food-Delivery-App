@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../main.dart';
 import '../../res/color.dart';
 
 class FavouriteScreen extends StatefulWidget {
@@ -22,16 +23,28 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.scaffold_background_color,
-          centerTitle: true,
-          elevation: 0,
-          title: Text(
-            "Favorite",
-            style: TextStyle(fontSize: 25.sp, color: Colors.black),
+appBar: AppBar(
+        backgroundColor: themeManager.themeMode == ThemeMode.light
+            ? AppColors.scaffold_background_color
+            : Colors.grey.shade900,
+        // backgroundColor: AppColors.scaffold_background_color,
+        centerTitle: true,
+        elevation: 0,
+        title: Text(
+          "Favorite",
+          style: TextStyle(
+            fontSize: 25.sp,
+            color: themeManager.themeMode == ThemeMode.light
+                ? Colors.grey.shade900
+                : Colors.white,
           ),
-          iconTheme: IconThemeData(color: Colors.black),
         ),
+        iconTheme: IconThemeData(
+          color: themeManager.themeMode == ThemeMode.light
+              ? Colors.grey.shade900
+              : Colors.white,
+        ),
+      ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('users-favourite-items')
