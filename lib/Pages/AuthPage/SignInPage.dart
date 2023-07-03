@@ -8,12 +8,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:food_delivery_app/Pages/AuthPage/SignUpPage.dart';
+import 'package:food_delivery_app/Pages/AuthPage/reset_password.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../Widget/violetButton.dart';
 import '../../data/auth.dart';
+import '../../main.dart';
 import '../../styles/styles.dart';
 import '../../controllers/text_field_controller.dart';
 
@@ -119,7 +122,9 @@ class _SignInPageState extends State<SignInPage> {
                 TextFormField(
                   style: GoogleFonts.inter(
                     fontSize: 18.0,
-                    color: const Color(0xFF151624),
+                    color: themeManager.themeMode == ThemeMode.light
+                        ? const Color(0xFF151624)
+                        : Colors.white,
                   ),
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -135,30 +140,42 @@ class _SignInPageState extends State<SignInPage> {
                   return TextFormField(
                     style: GoogleFonts.inter(
                       fontSize: 18.0,
-                      color: const Color(0xFF151624),
+                      color: themeManager.themeMode == ThemeMode.light
+                          ? const Color(0xFF151624)
+                          : Colors.white,
                     ),
                     controller: _passwordController,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
+                        borderSide: BorderSide(
+                            color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
+                            width: 1.0),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
+                        borderSide: BorderSide(
+                            color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
+                            width: 1.0),
                       ),
                       hintText: "Password",
                       hintStyle: GoogleFonts.inter(
-                        fontSize: 16.0,
-                        color: const Color(0xFFABB3BB),
-                        height: 1.0,
-                      ),
+            fontSize: 16.0,
+            color: const Color(0xFFABB3BB),
+            height: 1.0,
+          ),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _controller.isPasswordHiden.value
                               ? Icons.visibility_off
                               : Icons.visibility,
-                          color: Colors.black45,
+                          color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black45
+                              : Colors.white,
                         ),
                         onPressed: () {
                           _controller.isPasswordHiden.value =
@@ -181,7 +198,10 @@ class _SignInPageState extends State<SignInPage> {
                     const Spacer(),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "resetPassword");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => ResetPassword()));
                         },
                         child: Text("Forgot Password?",
                             style:
@@ -232,7 +252,9 @@ class _SignInPageState extends State<SignInPage> {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w300,
-                        color: Colors.black,
+                        color: themeManager.themeMode == ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       children: [
                         TextSpan(
@@ -243,7 +265,11 @@ class _SignInPageState extends State<SignInPage> {
                               fontWeight: FontWeight.w500,
                             ),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () =>Navigator.pushNamed(context, "signUp")),
+                              ..onTap =
+                                  () =>  Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => SignUpScreen()))),
                       ],
                     ),
                   ),

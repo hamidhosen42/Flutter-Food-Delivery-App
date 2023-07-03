@@ -32,10 +32,10 @@ class _SplashScreenState extends State<SplashScreen> {
     // final bool verified = isEmailVerified();
 
     if (user != null ) {
-      Timer(const Duration(seconds: 1),
+      Timer(const Duration(seconds: 5),
           () =>  Get.toNamed(home_page));
     } else {
-      Timer(const Duration(seconds: 1),
+      Timer(const Duration(seconds: 5),
           () => Get.toNamed(signIn));
     }
   }

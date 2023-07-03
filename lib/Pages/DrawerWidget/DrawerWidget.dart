@@ -9,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Pages/DrawerWidget/favourite_screen.dart';
 import 'package:food_delivery_app/Pages/DrawerWidget/theme_screen.dart';
 import 'package:food_delivery_app/Pages/HomePage/HomePage.dart';
+import 'package:food_delivery_app/utils/routes/route.dart';
+import 'package:get/get.dart';
 import '../profile/profile_screen.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -149,7 +151,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             title: InkWell(
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, "signIn");
+                Get.toNamed(signIn);
               },
               child: Text(
                 "Log Out",

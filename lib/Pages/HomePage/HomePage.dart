@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery_app/Pages/CardPage.dart';
 import 'package:get/get.dart';
 import '../../Widget/AppBarWidget.dart';
 import '../../Widget/CategoriesWidget.dart';
@@ -106,7 +107,10 @@ class HomePage extends StatelessWidget {
               ]),
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.pushNamed(context, "cartPage");
+               Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => CartPage()));
             },
             backgroundColor:Colors.white,
             child: Icon(

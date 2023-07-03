@@ -8,6 +8,8 @@ import 'package:food_delivery_app/res/color.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../main.dart';
+
 class ResetPassword extends StatefulWidget {
 
   @override
@@ -34,10 +36,17 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+       backgroundColor: themeManager.themeMode == ThemeMode.light
+            ? AppColors.scaffold_background_color
+            : Colors.black,
       appBar: AppBar(
-        backgroundColor: AppColors.scaffold_background_color,
+        backgroundColor: themeManager.themeMode == ThemeMode.light
+            ? AppColors.scaffold_background_color
+            : Colors.black,
         iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
+          color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black
+                              : Colors.white, //change your color here
         ),
         title: Text.rich(
           TextSpan(
@@ -82,20 +91,28 @@ class _ResetPasswordState extends State<ResetPassword> {
                 child: TextFormField(
                   style: GoogleFonts.inter(
                     fontSize: 18.0,
-                    color: const Color(0xFF151624),
+                     color: themeManager.themeMode == ThemeMode.light
+                        ? const Color(0xFF151624)
+                        : Colors.white,
                   ),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                      borderSide: BorderSide(color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white, width: 1.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                      borderSide: BorderSide(color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white, width: 1.0),
                     ),
-                    suffixIcon: const Icon(
+                    suffixIcon: Icon(
                       Icons.email,
-                      color: Colors.black45,
+                       color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black45
+                              : Colors.white,
                     ),
                     hintText: "Enter your email",
                     hintStyle: GoogleFonts.inter(
@@ -125,8 +142,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.circular(5.0),
                   color: AppColors.roundButtomColor,
                 ),
-                child: OutlinedButton(
-                  onPressed: () async {
+                child: InkWell(
+                  onTap: () async {
                     setState(() {
                       loading = true;
                     });
@@ -152,11 +169,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25.sp,
+                    child: Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.sp,
+                        ),
                       ),
                     ),
                   ),

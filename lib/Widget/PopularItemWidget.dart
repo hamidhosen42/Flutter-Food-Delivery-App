@@ -158,7 +158,7 @@ class PopularItemWidget extends StatelessWidget {
                               Icon(
                                 Icons.favorite_outline,
                                 color: themeManager.themeMode == ThemeMode.light
-                ? Colors.red
+                ? Colors.black
                 : Colors.white,
                               )
                             ],

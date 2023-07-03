@@ -54,7 +54,7 @@ class AuthController extends GetxController {
             .doc(userCredential.user!.uid)
             .set(userModel.toJson());
 
-        Navigator.pushNamed(context, "signIn");
+         Get.toNamed(signIn);
       } else {
         Fluttertoast.showToast(msg: 'Please enter all the fields');
       }
@@ -87,7 +87,7 @@ class AuthController extends GetxController {
         if (authCredential!.uid.isNotEmpty) {
           if (authCredential.emailVerified) {
             Fluttertoast.showToast(msg: 'Login Successful');
-            Navigator.pushNamed(context, "homePage");
+            Get.toNamed(home_page);
           } else {
             Fluttertoast.showToast(
                 msg: 'Email not verified. Please check your email and verify.');

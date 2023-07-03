@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:food_delivery_app/utils/routes/route.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -15,6 +16,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../../controllers/text_field_controller.dart';
 import '../../Widget/violetButton.dart';
 import '../../data/auth.dart';
+import '../../main.dart';
 import '../../styles/styles.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -122,7 +124,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   style: GoogleFonts.inter(
                     fontSize: 18.0,
-                    color: const Color(0xFF151624),
+                     color: themeManager.themeMode == ThemeMode.light
+                        ? const Color(0xFF151624)
+                        : Colors.white,
                   ),
                   controller: _nameController,
                   keyboardType: TextInputType.emailAddress,
@@ -137,7 +141,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   style: GoogleFonts.inter(
                     fontSize: 18.0,
-                    color: const Color(0xFF151624),
+                    color: themeManager.themeMode == ThemeMode.light
+                        ? const Color(0xFF151624)
+                        : Colors.white,
                   ),
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -151,16 +157,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // !----------------------Password Field------------------------
                 Obx(() {
                   return TextFormField(
+                    style: GoogleFonts.inter(
+                      fontSize: 18.0,
+                      color: themeManager.themeMode == ThemeMode.light
+                          ? const Color(0xFF151624)
+                          : Colors.white,
+                    ),
                     controller: _passwordController,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
+                        borderSide: BorderSide(color:themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white, width: 1.0),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
+                        borderSide: BorderSide(color: themeManager.themeMode == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white, width: 1.0),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       hintText: "Password",
@@ -172,9 +188,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       suffixIcon: IconButton(
                         icon: Icon(
                           _controller.isPasswordHiden.value
-                              ? Icons.visibility_off
+                             ? Icons.visibility_off
                               : Icons.visibility,
-                          color: Colors.black45,
+                           color: themeManager.themeMode == ThemeMode.light
+                              ? Colors.black45
+                              : Colors.white,
                         ),
                         onPressed: () {
                           _controller.isPasswordHiden.value =
@@ -197,7 +215,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Text(
                   'Creating an account means you\'re okay with our Terms of Services and our Privacy Policy',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black45),
+                  style: TextStyle(color: themeManager.themeMode == ThemeMode.light
+                            ? Colors.black45
+                            : Colors.white,),
                 ),
                 SizedBox(
                   height: 20.h,
@@ -244,7 +264,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w300,
-                        color: Colors.black,
+                        color: themeManager.themeMode == ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       children: [
                         TextSpan(
@@ -255,7 +277,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.pushNamed(context, "signIn")),
+                              ..onTap = () => Get.toNamed(signIn)),
                       ],
                     ),
                   ),

@@ -5,35 +5,51 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/res/color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../main.dart';
 
 class AppStyle {
-  TextStyle myTextStyle =
-      TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w600,
-      );
+  TextStyle myTextStyle = TextStyle(
+    fontSize: 30.sp,
+    fontWeight: FontWeight.w600,
+  );
 
   TextStyle signUpTextStyle = TextStyle(
       fontSize: 40.sp,
       fontWeight: FontWeight.w500,
       color: AppColors.violetColor);
 
-  InputDecoration textFieldDecoration(String hint,IconData icon) => InputDecoration(
-        suffixIcon: Icon(icon,color: Colors.black45,),
+  InputDecoration textFieldDecoration(String hint, IconData icon) =>
+  
+      InputDecoration(
+        suffixIcon: Icon(
+          icon,
+          color: themeManager.themeMode == ThemeMode.light
+              ? Colors.black45
+              : Colors.white,
+        ),
         border: OutlineInputBorder(),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, width: 1.0),
+          borderSide: BorderSide(
+              color: themeManager.themeMode == ThemeMode.light
+                  ? Colors.black
+                  : Colors.white,
+              width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, width: 1.0),
+          borderSide: BorderSide(
+              color: themeManager.themeMode == ThemeMode.light
+                  ? Colors.black
+                  : Colors.white,
+              width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
-
         hintText: hint,
-         hintStyle: GoogleFonts.inter(
-            fontSize: 16.0,
-            color: const Color(0xFFABB3BB),
-            height: 1.0,
-          ),
+        hintStyle: GoogleFonts.inter(
+          fontSize: 16.0,
+          color: const Color(0xFFABB3BB),
+          height: 1.0,
+        ),
       );
   progressDialog(context) => showDialog(
         context: context,
