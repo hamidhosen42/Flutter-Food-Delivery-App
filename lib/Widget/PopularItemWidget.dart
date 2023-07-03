@@ -37,6 +37,7 @@ class PopularItemWidget extends StatelessWidget {
                 var rating = data['rating'];
                 var price = data['price'];
                 var details = data['details'];
+                var subtitle = data['subtitle'];
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -47,6 +48,7 @@ class PopularItemWidget extends StatelessWidget {
                                 rating: rating,
                                 price: price,
                                 details: details,
+                                subtitle:subtitle,
                                 imageUrl: data['img'])));
                   },
                   child: Padding(

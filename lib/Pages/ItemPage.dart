@@ -58,7 +58,7 @@ class _ItemPageState extends State<ItemPage> {
       'name': widget.name,
       'rating': widget.rating,
       'price': widget.price,
-      'name': widget.name,
+      'subText': widget.subText,
       'imageUrl': widget.imageUrl,
       'details': widget.details,
     }).then(
@@ -80,10 +80,6 @@ class _ItemPageState extends State<ItemPage> {
             child: Container(
               height: 50.h,
               width: 50.w,
-              // decoration: const BoxDecoration(
-              //   borderRadius: BorderRadius.all(Radius.circular(25)),
-              //   color: Colors.black26,
-              // ),
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('users-favourite-items')
@@ -138,18 +134,21 @@ class _ItemPageState extends State<ItemPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: CachedNetworkImage(
-              imageUrl: widget.imageUrl,
-              height: 250.h,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              filterQuality: FilterQuality.high,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.redAccent,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10.r)),
+              child: CachedNetworkImage(
+                imageUrl: widget.imageUrl,
+                height: 250.h,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.high,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.redAccent,
+                  ),
                 ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           Arc(

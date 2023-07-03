@@ -69,8 +69,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(7.r),
-                                    topRight: Radius.circular(7.r),
+                                    topLeft: Radius.circular(5.r),
+                                    topRight: Radius.circular(5.r),
                                   ),
                                   child: CachedNetworkImage(
                                     imageUrl: data['imageUrl'],
