@@ -6,7 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:food_delivery_app/Pages/DrawerWidget/favourite_screen.dart';
+import 'package:food_delivery_app/Pages/HomePage/HomePage.dart';
+import '../profile/profile_screen.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -76,24 +78,36 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               }
             },
           ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.home,
-              color: Colors.red,
-            ),
-            title: Text(
-              "Home",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, CupertinoPageRoute(builder: (_) => HomePage()));
+            },
+            child: ListTile(
+              leading: Icon(
+                CupertinoIcons.home,
+                color: Colors.red,
+              ),
+              title: Text(
+                "Home",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.person,
-              color: Colors.red,
-            ),
-            title: Text(
-              "My Account",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, CupertinoPageRoute(builder: (_) => MyAccount()));
+            },
+            child: ListTile(
+              leading: Icon(
+                CupertinoIcons.person,
+                color: Colors.red,
+              ),
+              title: Text(
+                "My Account",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           ListTile(
@@ -103,11 +117,17 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          ListTile(
-            leading: Icon(CupertinoIcons.heart_fill, color: Colors.red),
-            title: Text(
-              "My Wish List",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: (){
+               Navigator.push(
+                  context, CupertinoPageRoute(builder: (_) => FavouriteScreen()));
+            },
+            child: ListTile(
+              leading: Icon(CupertinoIcons.heart_fill, color: Colors.red),
+              title: Text(
+                "Favorite Item",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           ListTile(
@@ -135,3 +155,4 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     );
   }
 }
+

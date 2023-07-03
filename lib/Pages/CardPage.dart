@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../Widget/AppBarWidget.dart';
 import '../Widget/CartBottomNavBar.dart';
-import '../Widget/DrawerWidget.dart';
+import 'DrawerWidget/DrawerWidget.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});

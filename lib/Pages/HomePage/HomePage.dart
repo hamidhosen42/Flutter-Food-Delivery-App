@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../Widget/AppBarWidget.dart';
 import '../../Widget/CategoriesWidget.dart';
-import '../../Widget/DrawerWidget.dart';
+import '../DrawerWidget/DrawerWidget.dart';
 import '../../Widget/NewestItemsWidget.dart';
 import '../../Widget/PopularItemWidget.dart';
 import 'carouselImages.dart';

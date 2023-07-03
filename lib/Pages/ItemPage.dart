@@ -1,13 +1,16 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_key_in_widget_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables, must_be_immutable, import_of_legacy_library_into_null_safe, unused_import, avoid_print
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_key_in_widget_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables, must_be_immutable, import_of_legacy_library_into_null_safe, unused_import, avoid_print, unused_local_variable, equal_keys_in_map, prefer_is_empty
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_delivery_app/Widget/AppBarWidget.dart';
-import 'package:food_delivery_app/Widget/DrawerWidget.dart';
+import 'package:food_delivery_app/Pages/DrawerWidget/DrawerWidget.dart';
 import '../Widget/ItemBottomNavBar.dart';
 import '../res/color.dart';
 // import 'package:clippy_flutter/clippy_flutter.dart';
@@ -38,16 +41,96 @@ class _ItemPageState extends State<ItemPage> {
   int? total = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  Future addToFavourite() async {
+    var ref = FirebaseFirestore.instance
+        .collection("users-favourite-items")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("place")
+        .doc();
+
+    String id = DateTime.now().microsecondsSinceEpoch.toString();
+
+    ref.set({
+      'name': widget.name,
+      'rating': widget.rating,
+      'price': widget.price,
+      'name': widget.name,
+      'imageUrl': widget.imageUrl,
+      'details': widget.details,
+    }).then(
+      (value) => Fluttertoast.showToast(
+        msg: "Added to favourite place",
+        backgroundColor: Colors.black87,
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     total = (quantity! * widget.price);
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Container(
+              height: 50.h,
+              width: 50.w,
+              // decoration: const BoxDecoration(
+              //   borderRadius: BorderRadius.all(Radius.circular(25)),
+              //   color: Colors.black26,
+              // ),
+              child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('users-favourite-items')
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .collection("place")
+                      .where("name", isEqualTo: widget.name)
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.data == null) {
+                      return Center(child: Text('Place is Empty'));
+                    }
+                    if (snapshot.hasError) {
+                      return Center(child: Text('Something went wrong'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    return IconButton(
+                      icon: snapshot.data!.docs.length == 0
+                          ? Icon(
+                              Icons.favorite_border,
+                              size: 30,
+                              color: Colors.black,
+                            )
+                          : Icon(
+                              Icons.favorite_border,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                      onPressed: () => snapshot.data!.docs.length == 0
+                          ? addToFavourite()
+                          : Fluttertoast.showToast(
+                              msg: "Already Added",
+                              backgroundColor: Colors.black87,
+                            ),
+                    );
+                  }),
+            ),
+          ),
+        ],
         backgroundColor: AppColors.scaffold_background_color,
         centerTitle: true,
         elevation: 0,
         title: Text(
           widget.name,
-          style: TextStyle(fontSize: 25.sp, color: Colors.black),
+          style: TextStyle(fontSize: 20.sp, color: Colors.black),
         ),
         iconTheme: IconThemeData(color: Colors.black),
       ),
@@ -153,7 +236,8 @@ class _ItemPageState extends State<ItemPage> {
                                       onPressed: () {
                                         if (quantity! >= 1) {
                                           quantity = (quantity! - 1);
-                                           total=(total!-quantity!*widget.price);
+                                          total = (total! -
+                                              quantity! * widget.price);
                                         }
                                         setState(() {});
                                       },
@@ -171,8 +255,7 @@ class _ItemPageState extends State<ItemPage> {
                                       onPressed: () {
                                         quantity = (quantity! + 1);
                                         // total=(total!+quantity!*widget.price);
-                                        setState(() {
-                                        });
+                                        setState(() {});
                                       },
                                       icon: Icon(
                                         CupertinoIcons.add,

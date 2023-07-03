@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery_app/Widget/AppBarWidget.dart';
-import 'package:food_delivery_app/Widget/DrawerWidget.dart';
+import 'package:food_delivery_app/Pages/DrawerWidget/DrawerWidget.dart';
 import '../Widget/ItemBottomNavBar.dart';
 import '../res/color.dart';
 // import 'package:clippy_flutter/clippy_flutter.dart';
