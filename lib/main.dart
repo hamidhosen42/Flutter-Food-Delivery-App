@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
+import 'Widget/AppBarWidget.dart';
 import 'theme/theme.dart';
 import 'theme/theme_manager.dart';
 
@@ -72,6 +73,7 @@ class _MyAppState extends State<MyApp> {
             initialRoute: splash,
             getPages: getPages,
             home: SplashScreen(),
+            // home: AppBarWidget(),
           );
         });
   }

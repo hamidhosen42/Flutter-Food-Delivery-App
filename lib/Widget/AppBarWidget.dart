@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Widget/search_bar_widget.dart';
 
 import '../main.dart';
 
@@ -40,29 +41,30 @@ class AppBarWidget extends StatelessWidget {
                   ]),
             ),
           ),
+
           // ------------notifications-----------------
-          InkWell(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.all(8),
-              child: Icon(Icons.notifications),
-              decoration: BoxDecoration(
-                  color: themeManager.themeMode == ThemeMode.light
-                      ? Colors.white
-                      : Colors.grey.shade900,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: themeManager.themeMode == ThemeMode.light
-                          ? Colors.grey.withOpacity(0.5)
-                          : Colors.grey.shade900,
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    )
-                  ]),
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {},
+          //   child: Container(
+          //     padding: EdgeInsets.all(8),
+          //     child: Icon(Icons.notifications),
+          //     decoration: BoxDecoration(
+          //         color: themeManager.themeMode == ThemeMode.light
+          //             ? Colors.white
+          //             : Colors.grey.shade900,
+          //         borderRadius: BorderRadius.circular(20),
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: themeManager.themeMode == ThemeMode.light
+          //                 ? Colors.grey.withOpacity(0.5)
+          //                 : Colors.grey.shade900,
+          //             spreadRadius: 2,
+          //             blurRadius: 10,
+          //             offset: Offset(0, 3),
+          //           )
+          //         ]),
+          //   ),
+          // ),
         ],
       ),
     );

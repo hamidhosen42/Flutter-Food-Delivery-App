@@ -82,6 +82,7 @@ dependencies:
   baseflow_plugin_template: ^2.1.1
   clippy_flutter: ^2.0.0-nullsafety.1
   flutter_stripe: any
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
